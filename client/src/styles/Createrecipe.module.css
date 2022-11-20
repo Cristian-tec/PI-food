@@ -1,0 +1,32 @@
+.create_recipe{
+    background-color: brown;
+    width: 600px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.create_recipe form{
+    display: flex;
+    flex-direction:column;
+    padding: 10px;
+}
+
+.create_recipe label{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.create_recipe input{
+    height: 25px;
+    border-radius: 5px;
+}
+
+.selectordiet {
+    height: 30px;
+    width: 186px;
+    border-radius: 5px;
+}
+.create_recipe textarea {
+    resize: vertical;
+    border-radius: 5px;
+}

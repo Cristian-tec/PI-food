@@ -1,0 +1,75 @@
+.inputtext {
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+}
+
+.selector {
+    width: 150px;
+    height: 26px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+}
+
+.botonsearch {
+    width: 100px;
+    height: 26px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+    transition: .3s;
+    font-weight: bold;
+}
+
+.botonsearch:hover {
+    background-color: rgb(134, 147, 248);
+}
+
+.recipes {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.botonCreateRecipe {
+    width: 120px;
+    height: 26px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+    transition: .3s;
+    font-weight: bold;
+}
+.botonCreateRecipe:hover {
+    background-color: rgb(134, 147, 248);
+}
+
+.botonrefresh {
+    width: 80px;
+    height: 26px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+    transition: .3s;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.botonrefresh:hover {
+    background-color: rgb(134, 147, 248);
+}
+
+.orderselectoralf{
+    width: 150px;
+    height: 26px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+}
+
+.orderselectorscore{
+    width: 150px;
+    height: 26px;
+    border-radius: 5px;
+    border-color: rgb(192, 192, 192);
+}

@@ -1,0 +1,36 @@
+.recipe{
+    margin: 10px;
+    height: 330px;
+    width: 250px;
+    background-color: #f8b400;
+    border-radius: 10px;
+    border-style: solid;   
+    border-color:#2c786c;
+}
+
+img{
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    position: static;
+}
+
+.title{
+    color: rgb(80, 85, 129);
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    width: 180px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    font-size: 0.8em;
+    text-shadow:0.1em 0.5em 0.6em black ;
+}
+
+.recipe h4 {
+    margin-top: 0px;
+    font-size: 0.7em;
+    text-shadow:0.2em 0.3em 0.6em rgb(119, 119, 119) ;
+}
+
