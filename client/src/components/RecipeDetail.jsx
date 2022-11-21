@@ -13,7 +13,7 @@ const RecipeDetail = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch(getRecipeDetail(props.match.params.id))
+        dispatch(getRecipeDetail(id))
     }, [dispatch])
 
 

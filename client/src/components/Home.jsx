@@ -27,9 +27,9 @@ const Home = (props) => {
     // ---------  PAGINADO -----------------------
 
     const allRecipes = useSelector((state) => state.recipes);
-    console.log(allRecipes + 'antes');
+    //console.log(allRecipes + 'antes');
     const [currentPage, setCurrentPage] = useState(1);        //
-    const [recipesPerPage, setRecipesPerPage] = useState(9);
+    const recipesPerPage= 9;
     const last = currentPage * recipesPerPage; //   1 * 9  -----> Last  9
     const first = last - recipesPerPage;       //  9  - 9  -----> First 0
     const currentRecipes = allRecipes?.slice(first, last);
@@ -40,9 +40,9 @@ const Home = (props) => {
 
     // --------- FIN PAGINADO  -------------------
 
-    useEffect(() => {
+/*     useEffect(() => {
         dispatch(searchRecipes(''))
-    }, [])
+    }, [dispatch]) */
 
 
     const changeHandler = (e) => {
@@ -78,7 +78,8 @@ const Home = (props) => {
     }
 
     return (
-        <>
+        <div className={style.containerhome}>
+            <nav className={style.navbar}>
             <button className={style.botonrefresh} onClick={refreshHandler}>Refresh</button>&nbsp;&nbsp;&nbsp;
             <input className={style.inputtext} type="text" name="title" value={input.title} onChange={changeHandler} />&nbsp;
 
@@ -117,13 +118,14 @@ const Home = (props) => {
                 <button className={style.botonCreateRecipe}>Create Recipe</button><br></br>
             </Link>
 
+            
+            </nav><br /><br />
             <Paginado
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes?.length}  // ESTE PUTO SIGNO ACA ME RESOLVIO TODO EL PROBLEMA !!!!
                 paginado={paginado}
                 currentPage = {currentPage}
             />
-
             <div className={style.recipes}>
                 {currentRecipes?.map(elem => { // antes era recipes sin paginar
                     return (
@@ -142,7 +144,13 @@ const Home = (props) => {
                 }
                 )}
             </div>
-        </>
+            <Paginado
+                recipesPerPage={recipesPerPage}
+                allRecipes={allRecipes?.length}  // ESTE PUTO SIGNO ACA ME RESOLVIO TODO EL PROBLEMA !!!!
+                paginado={paginado}
+                currentPage = {currentPage}
+            />
+        </div>
     )
 }
 

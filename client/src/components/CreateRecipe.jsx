@@ -47,9 +47,10 @@ const CreateRecipe = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         if (input.title !== '' && input.summary !== '') {
+
             //props.createRecipe(input);
             dispatch(createRecipe(input));
-            event.target.reset();
+
             //console.log(input.step);
             alert('Tarjeta creada con exito.!')
             setInput({
@@ -65,11 +66,26 @@ const CreateRecipe = (props) => {
         }
     }
 
-    const selectHandler = (e) => {
-        setInput({
-            ...input,
-            diets: [...input.diets, e.target.value]
-        });
+
+    const getSelect = (e) => {
+        e.preventDefault();
+        let diet1 = document.getElementById("diet1").value
+        let dietsSearch = input.diets;
+        console.log(dietsSearch);
+        if (dietsSearch.length > 2) console.log('Solo se permiten tres dietas por receta');
+        if (diet1 !== 'TipeOfDiet') {
+
+            for (let i = 0; i < dietsSearch.length; i++) {
+                if (dietsSearch[i] === diet1) {
+                    console.log('Ya Existe');
+                    return;
+                }
+            }
+            setInput({
+                ...input,
+                diets: [...input.diets, diet1]
+            })
+        }
     }
 
     const stepHandler = (e) => {
@@ -123,7 +139,7 @@ const CreateRecipe = (props) => {
 
                 <label htmlFor="diets">Diets:</label>
                 <div>
-                    <select className={style.selectordiet} name="diets" onChange={selectHandler}>
+                    <select className={style.selectordiet} id="diet1" name="diet1">
                         <option value="TipeOfDiet">Tipe of Diet</option>
                         <option value="vegan">Vegan</option>
                         <option value="vegetarian">Vegetarian</option>
@@ -139,38 +155,8 @@ const CreateRecipe = (props) => {
                         <option value="paleolithic">Paleolithic</option>
                         <option value="dairy free">Dairy Free</option>
                     </select>&nbsp;&nbsp;
-                    <select className={style.selectordiet} name="diets" onChange={selectHandler}>
-                        <option value="TipeOfDiet">Tipe of Diet</option>
-                        <option value="vegan">Vegan</option>
-                        <option value="vegetarian">Vegetarian</option>
-                        <option value="gluten free">Gluten Free</option>
-                        <option value="pescetarian">Pescetarian</option>
-                        <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
-                        <option value="ovo vegetarian">Ovo-Vegetarian</option>
-                        <option value="ketogenic">Ketogenic</option>
-                        <option value="paleo">Paleo</option>
-                        <option value="primal">Primal</option>
-                        <option value="low FODMAP">Low FODMAP</option>
-                        <option value="whole 30">Whole30</option>
-                        <option value="paleolithic">Paleolithic</option>
-                        <option value="dairy free">Dairy Free</option>
-                    </select>&nbsp;&nbsp;
-                    <select className={style.selectordiet} name="diets" onChange={selectHandler}>
-                        <option value="TipeOfDiet">Tipe of Diet</option>
-                        <option value="vegan">Vegan</option>
-                        <option value="vegetarian">Vegetarian</option>
-                        <option value="gluten free">Gluten Free</option>
-                        <option value="pescetarian">Pescetarian</option>
-                        <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
-                        <option value="ovo vegetarian">Ovo-Vegetarian</option>
-                        <option value="ketogenic">Ketogenic</option>
-                        <option value="paleo">Paleo</option>
-                        <option value="primal">Primal</option>
-                        <option value="low FODMAP">Low FODMAP</option>
-                        <option value="whole 30">Whole30</option>
-                        <option value="paleolithic">Paleolithic</option>
-                        <option value="dairy free">Dairy Free</option>
-                    </select>&nbsp;&nbsp;
+                    <button className={style.button_addDiet} onClick={getSelect}>Add Diet</button>
+
                 </div>
 
                 <label htmlFor="image">Image:</label>
@@ -183,11 +169,11 @@ const CreateRecipe = (props) => {
                 <br />
                 <div>
                     <Link to='/home'>
-                        <button type="text">Back to home</button>&nbsp;
+                        <button className={style.buttonCreate} type="text">Back to home</button>&nbsp;
                     </Link>
-                    <button type="submit" onClick={stepHandler}>Create Recipe</button>&nbsp;
+                    <button className={style.buttonCreate} type="submit" onClick={stepHandler}>Create Recipe</button>&nbsp;
                     <Link to='/createrecipe'>
-                        <button type="text" onClick={newrecipeHandler}>New Recipe</button>
+                        <button className={style.buttonCreate} type="text" onClick={newrecipeHandler}>New Recipe</button>
                     </Link>
                 </div>
 

@@ -2,7 +2,9 @@
     background-color: brown;
     width: 600px;
     margin: auto;
-    border-radius: 5px;
+    border-radius: 20px;
+    border-color: rgb(65, 69, 76);
+    border-style: solid;
 }
 
 .create_recipe form{
@@ -14,6 +16,8 @@
 .create_recipe label{
     font-size: 25px;
     font-weight: bold;
+    color: aliceblue;
+    text-shadow:0.1em 0.5em 0.6em rgb(0, 0, 0) ;
 }
 
 .create_recipe input{
@@ -23,10 +27,32 @@
 
 .selectordiet {
     height: 30px;
-    width: 186px;
+    width: 420px;
     border-radius: 5px;
 }
 .create_recipe textarea {
     resize: vertical;
     border-radius: 5px;
+}
+
+.button_addDiet{
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    transition: 0.15s;
+    font-weight: bold;
+}
+
+.button_addDiet:hover {
+    background-color: rgb(134, 147, 248);
+}
+
+.buttonCreate{
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    transition: 0.15s;
+}
+.buttonCreate:hover {
+    background-color: rgb(134, 147, 248);
 }
