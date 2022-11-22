@@ -14,9 +14,11 @@ Es requisito que el formulario de creación esté validado con JavaScript y no s
 
 import { useState } from "react"
 import { useDispatch } from 'react-redux'
+import { useEffect } from "react";
 import { createRecipe } from "../redux/actions"
 import style from '../styles/Createrecipe.module.css'
 import { Link } from 'react-router-dom';
+import checkErrors from '../control/control'
 
 const CreateRecipe = (props) => {
 
@@ -30,17 +32,26 @@ const CreateRecipe = (props) => {
         image: '',
         diets: [],
     })
+
     //console.log(input);
 
     const changeHandler = (e) => {
         const property = e.target.name; //aca capturo el name del input en el que escriba
         const value = e.target.value;
-        //console.log(input);
+
+        checkErrors({ [property]: value });
+
         setInput({
             ...input,
             [property]: value
         })
     }
+
+    useEffect(() => {
+        //let arrayDiet = input.diets.join(' | ')
+        //console.log(array);
+    }, [input.diets])
+
 
     // LA IDEA es que cuando haga click en el boton este estado local
     // pase al estado global
@@ -71,13 +82,14 @@ const CreateRecipe = (props) => {
         e.preventDefault();
         let diet1 = document.getElementById("diet1").value
         let dietsSearch = input.diets;
-        console.log(dietsSearch);
-        if (dietsSearch.length > 2) console.log('Solo se permiten tres dietas por receta');
+        //console.log(dietsSearch);
+        if (dietsSearch.length > 2) return alert('Solo se permiten tres dietas por receta');
         if (diet1 !== 'TipeOfDiet') {
 
             for (let i = 0; i < dietsSearch.length; i++) {
                 if (dietsSearch[i] === diet1) {
                     console.log('Ya Existe');
+                    alert('La receta elegida ya fue ingresada.')
                     return;
                 }
             }
@@ -86,11 +98,12 @@ const CreateRecipe = (props) => {
                 diets: [...input.diets, diet1]
             })
         }
+
     }
 
     const stepHandler = (e) => {
-        let step1 = document.getElementById("step1").value
-        let step2 = document.getElementById("step2").value
+        let step1 = '1) ' + document.getElementById("step1").value
+        let step2 = '2) ' + document.getElementById("step2").value
 
         if (step1 !== '' && step2 !== '') {
             setInput({
@@ -156,8 +169,8 @@ const CreateRecipe = (props) => {
                         <option value="dairy free">Dairy Free</option>
                     </select>&nbsp;&nbsp;
                     <button className={style.button_addDiet} onClick={getSelect}>Add Diet</button>
-
                 </div>
+                <p>{input.diets.join(' | ')}</p>
 
                 <label htmlFor="image">Image:</label>
                 <input type="text" name="image" value={input.image} onChange={changeHandler} />

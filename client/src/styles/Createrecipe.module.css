@@ -1,26 +1,28 @@
-.create_recipe{
+.create_recipe {
     background-color: brown;
     width: 600px;
+    display: grid;
     margin: auto;
+    margin-top: 50px;
     border-radius: 20px;
     border-color: rgb(65, 69, 76);
     border-style: solid;
 }
 
-.create_recipe form{
+.create_recipe form {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     padding: 10px;
 }
 
-.create_recipe label{
+.create_recipe label {
     font-size: 25px;
     font-weight: bold;
     color: aliceblue;
-    text-shadow:0.1em 0.5em 0.6em rgb(0, 0, 0) ;
+    text-shadow: 0.1em 0.5em 0.6em rgb(0, 0, 0);
 }
 
-.create_recipe input{
+.create_recipe input {
     height: 25px;
     border-radius: 5px;
 }
@@ -30,12 +32,13 @@
     width: 420px;
     border-radius: 5px;
 }
+
 .create_recipe textarea {
     resize: vertical;
     border-radius: 5px;
 }
 
-.button_addDiet{
+.button_addDiet {
     width: 150px;
     height: 30px;
     border-radius: 5px;
@@ -47,12 +50,18 @@
     background-color: rgb(134, 147, 248);
 }
 
-.buttonCreate{
+.buttonCreate {
     width: 150px;
     height: 30px;
     border-radius: 5px;
     transition: 0.15s;
 }
+
 .buttonCreate:hover {
     background-color: rgb(134, 147, 248);
+}
+
+.create_recipe p{
+    font-weight:bold;
+    color: white;
 }

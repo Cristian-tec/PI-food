@@ -38,11 +38,11 @@ const Home = (props) => {
         setCurrentPage(pageNumber)
     }
 
-    // --------- FIN PAGINADO  -------------------
+    // --------- FIN PAGINADO -------------------
 
-/*     useEffect(() => {
-        dispatch(searchRecipes(''))
-    }, [dispatch]) */
+    useEffect(() => {
+        dispatch(searchRecipes(''));
+    }, [dispatch])
 
 
     const changeHandler = (e) => {
@@ -60,6 +60,7 @@ const Home = (props) => {
 
     const buttonFilter = (e) => {
         //console.log(input.diets);
+        if(input.diets === 'TipeOfDiet') return;
         dispatch(searchRecipesDiet(input.diets))
     }
 

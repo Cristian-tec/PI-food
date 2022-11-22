@@ -8,6 +8,8 @@ export const SEARCH_RECIPES_DIET = 'GET_RECIPES_DIET';
 export const ORDER_SCORE = 'ORDER_SCORE';
 export const ORDER_ALPH = 'ORDER_ALPH';
 
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
+
 
 export const APIKEY = 'a45dec4b0fed478c813424d93c4332ad'
 // --> API KEY 2 :  f1d2428c5e144dcab5123469d0541c8a
@@ -57,16 +59,22 @@ export const searchRecipesDiet = (diet) => {
     }
 }
 
-export const orderScore = (order) =>{
+export const orderScore = (order) => {
     return {
         type: ORDER_SCORE,
         payload: order
     }
 }
 
-export const orderAlph = (order) =>{
+export const orderAlph = (order) => {
     return {
         type: ORDER_ALPH,
         payload: order
+    }
+}
+
+export const cleanDetail = () => {
+    return {
+        type: CLEAN_DETAIL
     }
 }

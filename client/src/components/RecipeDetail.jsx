@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getRecipeDetail } from '../redux/actions'
+import { getRecipeDetail, cleanDetail } from '../redux/actions'
 import { Link } from 'react-router-dom';
 import style from '../styles/RecipeDetail.module.css'
 
@@ -11,10 +11,15 @@ const RecipeDetail = (props) => {
 
     const dispatch = useDispatch();
     const { id } = useParams();
-
+    //props.match.params.id
     useEffect(() => {
-        dispatch(getRecipeDetail(id))
-    }, [dispatch])
+        dispatch(getRecipeDetail(id));
+
+        return function () { // esto se eejcuta cuando se desmonta el componente
+            dispatch(cleanDetail());
+        };
+
+    }, [dispatch, id])
 
 
     const recipeDetail = useSelector(state => state.recipeDetail)

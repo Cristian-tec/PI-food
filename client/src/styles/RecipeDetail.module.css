@@ -1,25 +1,33 @@
-
-.recipeDetail{
+.recipeDetail {
     margin: auto;
-    background-color: blueviolet;
+    margin-top: 20px;
+    background-color: #f8b400;
+    border-color: #2c786c;
+    border-style: solid;
     width: 800px;
     height: 600;
     border-radius: 20px;
-    text-shadow:0.1em 0.5em 0.6em rgb(113, 105, 105) ;
 }
 
-.recipeDetail img{
-    width: 250px;
-    height: 250px;
+.recipeDetail img {
+    width: 300px;
+    height: 300px;
+    border-color: #2c786c;
+    border-style: solid;
 }
 
-.recipeDetail h3{
+.recipeDetail h3 {
     color: rgb(224, 224, 186);
-    text-shadow:0.1em 0.5em 0.6em rgb(30, 29, 29) ;
+    text-shadow: 0.1em 0.5em 0.6em rgb(30, 29, 29);
 }
 
-.recipeDetail h1{
-   color:rgb(11, 69, 175);
-   background-color: aqua;
-   border-radius: 5px;
+.recipeDetail h1 {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+    color: rgb(11, 69, 175);
+    background-color: rgb(212, 207, 223);
+    border-radius: 10px;
+    text-shadow: 0.1em 0.5em 0.6em rgb(30, 29, 29);
 }
