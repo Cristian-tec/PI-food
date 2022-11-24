@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
                 attributes: ['id', 'title', 'image', 'summary', 'healthScore'],
                 // attributes: ['id', 'title', 'image', 'summary']
                 include: [
-                    {// aca hago la puta relacion para que me traiga automaticamente de la tabla intermedia
+                    {// aca hago la relacion para que me traiga automaticamente de la tabla intermedia
                         model: Diet,
                         attributes: ["name"],
                         through: {
@@ -61,16 +61,14 @@ router.get('/', async (req, res) => {
                 objeto.image = elem.image;
                 objeto.summary = elem.summary;
                 objeto.healthScore = elem.healthScore;
-
                 objeto.diets = elem.diets.map(e => e.name) // aca paso de [{diet: 'vegan'}, {diet:'gluten'}] -> ['vegan', 'gluten']
                 return objeto;
             });
 
             const total = reFormat.concat(propS);
 
-            if (total.length === 0) throw new Error('La receta buscada no existe en nuestra BBDD')
+          //   ** if (total.length === 0)  alert('No se encontro lo que busca...');/* throw new Error('La receta buscada no existe en nuestra BBDD') */
             res.status(200).json(total);
-
 
         } else {
 
@@ -102,7 +100,6 @@ router.get('/', async (req, res) => {
                 objeto.image = elem.image;
                 objeto.summary = elem.summary;
                 objeto.healthScore = elem.healthScore;
-
                 objeto.diets = elem.diets.map(e => e.name) // aca paso de [{diet: 'vegan'}, {diet:'gluten'}] -> ['vegan', 'gluten']
                 return objeto;
             });
@@ -226,6 +223,47 @@ router.post('/', async (req, res) => {
     } catch (error) {
         return res.status(404).send(error.message)
     }
+})
+
+router.delete('/:idDelete', async (req, res) => {
+
+    try {
+        const { idDelete } = req.params;
+        if (idDelete) {
+            console.log(idDelete + '<--');
+            const recipeFind = await Recipe.findByPk(idDelete);
+            if (recipeFind) {
+                await recipeFind.destroy();
+                res.status(200).send('Usuario: ' + recipeFind.id + ' eliminado')
+            } else {
+                throw new Error('No existe el id a eliminar...')
+            }
+        }
+    } catch (error) {
+        return res.status(404).send(error.message)
+    }
+
+})
+
+router.put('/', async (req, res) => {
+
+    try {
+
+        const { id, title, summary, healthScore } = req.body;
+        const recipeMod = await Recipe.findByPk(id);
+
+        if(recipeMod){
+            recipeMod.title = title;
+            recipeMod.summary = summary;
+            recipeMod.healthScore = healthScore;
+            recipeMod.save();
+            res.status(200).send('Se modificaron los datos con exito')
+        }
+
+    } catch (error) {
+        return res.status(404).send(error.message)
+    }
+
 })
 
 module.exports = router;
