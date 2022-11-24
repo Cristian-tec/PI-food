@@ -24,7 +24,7 @@
   left: 250px;
 }
 body{
-  background-image: url('../recipes.jpg');
+  background-image: url('../img/recipes.jpg');
   background-size: 100%;
   background-attachment: fixed;
 }

@@ -6,7 +6,7 @@ const LandingPage = (props) => {
     return (
 
         <>
-            <div>
+            <div className={style.container}>
                 <h1>Food recipes API</h1>
                 <Link to="/home">
                     <button className={style.boton}>Ingresar al sitio</button>

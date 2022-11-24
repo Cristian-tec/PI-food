@@ -40,10 +40,10 @@ const Home = (props) => {
 
     // --------- FIN PAGINADO -------------------
 
-    useEffect(() => {
+/*     useEffect(() => {
         dispatch(searchRecipes(''));
     }, [dispatch])
-
+ */
 
     const changeHandler = (e) => {
         // console.log(value);
@@ -128,7 +128,7 @@ const Home = (props) => {
                 currentPage = {currentPage}
             />
             <div className={style.recipes}>
-                {currentRecipes?.map(elem => { // antes era recipes sin paginar
+                {currentRecipes?.map(elem => { 
                     return (
                         //<Link to={`/home/${elem.id}`}>
                         <Recipe
@@ -140,7 +140,6 @@ const Home = (props) => {
                             diets={elem.diets}
                         />
                         //</Link>
-
                     )
                 }
                 )}

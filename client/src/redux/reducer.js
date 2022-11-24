@@ -20,6 +20,8 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SEARCH_RECIPES:
+            // console.log(action.payload + 'xxxx'); **
+            // if(action.payload.length === 0) alert('No se encontro nada')  **
             return { ...state, recipes: action.payload, recipesDiet: action.payload };
 
         case GET_RECIPE_DETAIL:
