@@ -21,15 +21,15 @@ const Home = (props) => {
         }
     );
 
-   // const recipes = useSelector((state) => state.recipes)
+    // const recipes = useSelector((state) => state.recipes)
     const dispatch = useDispatch();
 
     // ---------  PAGINADO -----------------------
 
-    const allRecipes = useSelector((state) => state.recipes);
+    const allRecipes = useSelector((state) => state.recipes);  // 100 de la API + las de la BBDD
     //console.log(allRecipes + 'antes');
     const [currentPage, setCurrentPage] = useState(1);        //
-    const recipesPerPage= 9;
+    const recipesPerPage = 9;
     const last = currentPage * recipesPerPage; //   1 * 9  -----> Last  9
     const first = last - recipesPerPage;       //  9  - 9  -----> First 0
     const currentRecipes = allRecipes?.slice(first, last);
@@ -40,10 +40,10 @@ const Home = (props) => {
 
     // --------- FIN PAGINADO -------------------
 
-/*     useEffect(() => {
-        dispatch(searchRecipes(''));
-    }, [dispatch])
- */
+    /*     useEffect(() => {
+            dispatch(searchRecipes(''));
+        }, [dispatch])
+     */
 
     const changeHandler = (e) => {
         // console.log(value);
@@ -60,7 +60,7 @@ const Home = (props) => {
 
     const buttonFilter = (e) => {
         //console.log(input.diets);
-        if(input.diets === 'TipeOfDiet') return;
+        if (input.diets === 'TipeOfDiet') return;
         dispatch(searchRecipesDiet(input.diets))
     }
 
@@ -81,54 +81,54 @@ const Home = (props) => {
     return (
         <div className={style.containerhome}>
             <nav className={style.navbar}>
-            <button className={style.botonrefresh} onClick={refreshHandler}>Refresh</button>&nbsp;&nbsp;&nbsp;
-            <input className={style.inputtext} type="text" name="title" value={input.title} onChange={changeHandler} />&nbsp;
+                <button className={style.botonrefresh} onClick={refreshHandler}>Refresh</button>&nbsp;&nbsp;&nbsp;
+                <input className={style.inputtext} type="text" name="title" value={input.title} onChange={changeHandler} />&nbsp;
 
-            <button className={style.botonsearch} id='search' onClick={searchHandler}>Search</button>&nbsp;
-            <select className={style.selector} name="diets" value={input.diets} onChange={changeHandler}>
-                <option value="TipeOfDiet">Tipe of Diet</option>
-                <option value="vegan">Vegan</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="gluten free">Gluten Free</option>
-                <option value="pescetarian">Pescetarian</option>
-                <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
-                <option value="ovo vegetarian">Ovo-Vegetarian</option>
-                <option value="ketogenic">Ketogenic</option>
-                <option value="paleo">Paleo</option>
-                <option value="primal">Primal</option>
-                <option value="low FODMAP">Low FODMAP</option>
-                <option value="whole 30">Whole30</option>
-                <option value="paleolithic">Paleolithic</option>
-                <option value="dairy free">Dairy Free</option>
-            </select>&nbsp;
-            <button className={style.botonCreateRecipe} onClick={buttonFilter}>Filter</button>&nbsp;
+                <button className={style.botonsearch} id='search' onClick={searchHandler}>Search</button>&nbsp;
+                <select className={style.selector} name="diets" value={input.diets} onChange={changeHandler}>
+                    <option value="TipeOfDiet">Tipe of Diet</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="gluten free">Gluten Free</option>
+                    <option value="pescetarian">Pescetarian</option>
+                    <option value="lacto ovo vegetarian">Lacto-Vegetarian</option>
+                    <option value="ovo vegetarian">Ovo-Vegetarian</option>
+                    <option value="ketogenic">Ketogenic</option>
+                    <option value="paleo">Paleo</option>
+                    <option value="primal">Primal</option>
+                    <option value="low FODMAP">Low FODMAP</option>
+                    <option value="whole 30">Whole30</option>
+                    <option value="paleolithic">Paleolithic</option>
+                    <option value="dairy free">Dairy Free</option>
+                </select>&nbsp;
+                <button className={style.botonCreateRecipe} onClick={buttonFilter}>Filter</button>&nbsp;
 
-            <select className={style.orderselectoralf} name="orderselectoralf" onChange={alphHandler}>
-                <option name="nothing">Alph. order</option>
-                <option name="asc">Asc.</option>
-                <option name="desc">Desc.</option>
-            </select>&nbsp;
+                <select className={style.orderselectoralf} name="orderselectoralf" onChange={alphHandler}>
+                    <option name="nothing">Alph. order</option>
+                    <option name="asc">Asc.</option>
+                    <option name="desc">Desc.</option>
+                </select>&nbsp;
 
-            <select className={style.orderselectorscore} name="orderselectorsco" onChange={scoreHandler}>
-                <option name="nothing">Score order</option>
-                <option name="asc">Asc.</option>
-                <option name="desc">Des.</option>
-            </select>&nbsp;
+                <select className={style.orderselectorscore} name="orderselectorsco" onChange={scoreHandler}>
+                    <option name="nothing">Score order</option>
+                    <option name="asc">Asc.</option>
+                    <option name="desc">Des.</option>
+                </select>&nbsp;
 
-            <Link to='/createrecipe'>
-                <button className={style.botonCreateRecipe}>Create Recipe</button><br></br>
-            </Link>
+                <Link to='/createrecipe'>
+                    <button className={style.botonCreateRecipe}>Create Recipe</button><br></br>
+                </Link>
 
-            
+
             </nav><br /><br />
             <Paginado
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes?.length}  // ESTE PUTO SIGNO ACA ME RESOLVIO TODO EL PROBLEMA !!!!
                 paginado={paginado}
-                currentPage = {currentPage}
+                currentPage={currentPage}
             />
             <div className={style.recipes}>
-                {currentRecipes?.map(elem => { 
+                {currentRecipes?.map(elem => {
                     return (
                         //<Link to={`/home/${elem.id}`}>
                         <Recipe
@@ -148,7 +148,7 @@ const Home = (props) => {
                 recipesPerPage={recipesPerPage}
                 allRecipes={allRecipes?.length}  // ESTE PUTO SIGNO ACA ME RESOLVIO TODO EL PROBLEMA !!!!
                 paginado={paginado}
-                currentPage = {currentPage}
+                currentPage={currentPage}
             />
         </div>
     )

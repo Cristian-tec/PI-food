@@ -63,7 +63,7 @@ const CreateRecipe = (props) => {
             dispatch(createRecipe(input));
 
             //console.log(input.step);
-            alert('Tarjeta creada con exito.!')
+            alert('Recipe created successfully!')
             setInput({
                 title: '',
                 summary: '',
@@ -72,6 +72,7 @@ const CreateRecipe = (props) => {
                 image: '',
                 diets: [],
             });
+            document.getElementById('diet1').selectedIndex = 0;
         } else {
             alert('The title and summary fields are required.')
         }
@@ -98,7 +99,6 @@ const CreateRecipe = (props) => {
                 diets: [...input.diets, diet1]
             })
         }
-
     }
 
     const stepHandler = (e) => {
@@ -125,7 +125,7 @@ const CreateRecipe = (props) => {
     }
 
     const newrecipeHandler = (e) => {
-        //e.target.reset();
+        
         setInput({
             title: '',
             summary: '',
@@ -134,7 +134,8 @@ const CreateRecipe = (props) => {
             image: '',
             diets: [],
         });
-        console.log('Crear nueva tarjeta...');
+        document.getElementById('diet1').selectedIndex = 0;
+        //console.log('Crear nueva tarjeta...');
     }
 
     return (

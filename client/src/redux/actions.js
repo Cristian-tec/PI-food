@@ -9,6 +9,7 @@ export const ORDER_SCORE = 'ORDER_SCORE';
 export const ORDER_ALPH = 'ORDER_ALPH';
 
 export const CLEAN_DETAIL = 'CLEAN_DETAIL';
+export const DELETE_RECIPE = 'DELETE_RECIPE';
 
 export const APIKEY = 'a45dec4b0fed478c813424d93c4332ad'
 // --> API KEY 2 :  f1d2428c5e144dcab5123469d0541c8a
@@ -75,5 +76,13 @@ export const orderAlph = (order) => {
 export const cleanDetail = () => {
     return {
         type: CLEAN_DETAIL
+    }
+}
+
+export const deleteRecipe = (id) => {
+    console.log(id);
+    return  async function (dispatch) {// aca no funcionaria igual sin el return???
+        await axios.delete(`http://localhost:3001/recipes/${id}`)
+        .then(response => dispatch({ type: DELETE_RECIPE, payload: response.data }))
     }
 }

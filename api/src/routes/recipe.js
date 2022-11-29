@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const { Recipe, Diet, Recipe_Diet } = require('../db'); // ACA importo donde ejecuto los models de tablas
-
+const  { getRecipeTitle, getRecipeAll} = require  ('../controllers/controllers')
 const {
     API_Key
 } = process.env;
@@ -22,90 +22,15 @@ router.get('/', async (req, res) => {
     try {
 
         const { title } = req.query;
-        //  if (title) throw new Error('Debes ingresar una query valida.--> ?title=busqueda')
         if (title) {
-            const queryAxios = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key}&addRecipeInformation=true&query=${title}`)
-            //console.log(queryAxios.data.results);
-            // console.log(title + '<--');
-            const queryBD = await Recipe.findAll({
 
-                attributes: ['id', 'title', 'image', 'summary', 'healthScore'],
-                // attributes: ['id', 'title', 'image', 'summary']
-                include: [
-                    {// aca hago la relacion para que me traiga automaticamente de la tabla intermedia
-                        model: Diet,
-                        attributes: ["name"],
-                        through: {
-                            attributes: [],
-                        },
-                    }
-                ],
-            });
-
-            let propS = [];
-            if (queryAxios.data.results.length > 0) {
-                propS = queryAxios.data.results.map(elem => {
-                    return { id: elem.id, title: elem.title, image: elem.image, summary: elem.summary, diets: elem.diets, healthScore: elem.healthScore }
-                });
-            }
-
-            //filtro la busqueda de la bd interna
-            const filter = queryBD.filter(elem => {
-                return elem.title.toLowerCase().includes(title.toLowerCase())
-            })
-            //console.log(filter);
-            const reFormat = filter.map(elem => {
-                let objeto = {};
-                objeto.id = elem.id;
-                objeto.title = elem.title;
-                objeto.image = elem.image;
-                objeto.summary = elem.summary;
-                objeto.healthScore = elem.healthScore;
-                objeto.diets = elem.diets.map(e => e.name) // aca paso de [{diet: 'vegan'}, {diet:'gluten'}] -> ['vegan', 'gluten']
-                return objeto;
-            });
-
-            const total = reFormat.concat(propS);
-
-          //   ** if (total.length === 0)  alert('No se encontro lo que busca...');/* throw new Error('La receta buscada no existe en nuestra BBDD') */
-            res.status(200).json(total);
+            const result = await getRecipeTitle(title);
+            res.status(200).json(result);
 
         } else {
 
-            const queryAxios = await axios
-                (`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_Key}&addRecipeInformation=true&number=100`)
-            const propS = await queryAxios.data.results.map(elem => {
-                return { id: elem.id, title: elem.title, image: elem.image, summary: elem.summary, diets: elem.diets, healthScore: elem.healthScore }
-            });
-
-            const queryBD = await Recipe.findAll({
-                attributes: ['id', 'title', 'image', 'summary', 'healthScore'],
-                include: [
-                    {// aca hago la puta relacion para que me traiga automaticamente de la tabla intermedia
-                        model: Diet,
-                        attributes: ["name"],
-                        through: {
-                            attributes: [],
-                        },
-                    }
-                ],
-            });
-            //console.log(queryBD);
-            //esto solo para que me quede la info igual a como la envia la api
-            //ACA PROBAR CON LOS tre puntos {...queryBD, diets: queryBD.diets.map(elem => elem.name)
-            const reFormat = queryBD.map(elem => {
-                let objeto = {};
-                objeto.id = elem.id;
-                objeto.title = elem.title;
-                objeto.image = elem.image;
-                objeto.summary = elem.summary;
-                objeto.healthScore = elem.healthScore;
-                objeto.diets = elem.diets.map(e => e.name) // aca paso de [{diet: 'vegan'}, {diet:'gluten'}] -> ['vegan', 'gluten']
-                return objeto;
-            });
-
-            const total = reFormat.concat(propS);
-            res.status(200).json(total);
+            const result = await getRecipeAll();
+            res.status(200).json(result);
         }
 
     } catch (error) {
@@ -233,8 +158,10 @@ router.delete('/:idDelete', async (req, res) => {
             console.log(idDelete + '<--');
             const recipeFind = await Recipe.findByPk(idDelete);
             if (recipeFind) {
-                await recipeFind.destroy();
-                res.status(200).send('Usuario: ' + recipeFind.id + ' eliminado')
+                await recipeFind.destroy(); 
+                // res.status(200).send('Usuario: ' + recipeFind.id + ' eliminado')
+                const result = await getRecipeAll();
+                res.status(200).json(result);
             } else {
                 throw new Error('No existe el id a eliminar...')
             }
@@ -252,7 +179,7 @@ router.put('/', async (req, res) => {
         const { id, title, summary, healthScore } = req.body;
         const recipeMod = await Recipe.findByPk(id);
 
-        if(recipeMod){
+        if (recipeMod) {
             recipeMod.title = title;
             recipeMod.summary = summary;
             recipeMod.healthScore = healthScore;

@@ -4,7 +4,8 @@ import {
     SEARCH_RECIPES_DIET,
     ORDER_SCORE,
     ORDER_ALPH,
-    CLEAN_DETAIL
+    CLEAN_DETAIL,
+    DELETE_RECIPE
 } from './actions'
 
 
@@ -96,6 +97,9 @@ const rootReducer = (state = initialState, action) => {
 
         case CLEAN_DETAIL:
             return { ...state, recipeDetail: {} }
+
+        case DELETE_RECIPE:
+            return { ...state, recipes: action.payload }
 
         default:
             return { ...state };

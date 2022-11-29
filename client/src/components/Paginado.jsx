@@ -13,10 +13,12 @@ const Paginado = ({ recipesPerPage, allRecipes, paginado, currentPage }) => {
     */
     return (
         <nav className={style.paginado}>
+            <h3 onClick={() => paginado(currentPage-1)} className={style.prevNext}>Prev</h3>
             {pageNumbers?.map(number =>
                 <p className={currentPage === number ? style.active : ''} onClick={() => paginado(number)} key={number}>{number}</p>
             )
             }
+            <h3 onClick={() => paginado(currentPage+1)} className={style.prevNext}>Next</h3>
         </nav>
     )
 }

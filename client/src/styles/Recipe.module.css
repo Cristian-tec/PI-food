@@ -1,7 +1,97 @@
-.recipe{
-    margin: 10px;
-    height: 330px;
+/* background-image: url('../img/background_recipe.png'); */
+/* .image_contain{
+    background-color: rgb(255, 234, 0);
     width: 250px;
+} */
+
+.recipe{
+    
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin: 10px;
+    height: 380px;
+    width: 280px;
+    background-image: url('../img/Untitled-1.png');
+    border-radius: 10px;
+    border-style: solid;   
+    border-color: #a99407;  
+    transition: 0.3s;
+}
+
+.recipe:hover{
+    transform: scale(1.10);
+}
+
+.image{
+    width: 150px;
+    height: 150px;
+    margin-left: 60px;
+    border-radius: 10px;
+   /*  border-color: rgb(124, 122, 142); */
+    border-color: #a99407;
+    border-style: solid ;
+}
+
+
+
+.title{
+    color: rgb(80, 85, 129);
+    background-color: rgb(255, 255, 255);
+    padding: 5px;
+    width: 180px;
+    height: 40px;
+    margin-left: 60px;
+    margin-right: auto;
+    border-radius: 5px;
+    border-color: #a99407;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 0.8em;
+    text-shadow:0.1em 0.5em 0.6em black ;
+}
+
+.recipe h4 {
+    margin-top: 0px;
+    margin-left: 50px;
+    border-radius: 5px;
+    border-color: #a99407;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 0.7em;
+    text-shadow:0.2em 0.3em 0.6em rgb(30, 30, 30) ;
+    background-color: white;
+}
+.diets_contain{
+    width: 250px;
+    height: 50px;
+    margin-left: 10px;
+}
+
+.borrar{
+    width: 60px;
+    border-radius: 5px;
+    border-color: #07dc72;
+    margin-left: 50px;
+
+    margin-bottom: 10px;
+}
+.borrar:hover {
+    background-color: rgb(134, 147, 248);
+}
+
+
+
+
+/* OPCION UNO */
+/* .recipe{
+    
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin: 10px;
+    height: 380px;
+    width: 280px;
     background-color: #f8b400;
     border-radius: 10px;
     border-style: solid;   
@@ -13,12 +103,15 @@
     transform: scale(1.10);
 }
 
-img{
+.image{
     width: 150px;
     height: 150px;
     border-radius: 10px;
-    position: static;
+    border-color: rgb(124, 122, 142);
+    border-style: solid ;
 }
+
+
 
 .title{
     color: rgb(80, 85, 129);
@@ -39,3 +132,15 @@ img{
     text-shadow:0.2em 0.3em 0.6em rgb(119, 119, 119) ;
 }
 
+.borrar{
+    width: 60px;
+    border-radius: 5px;
+    border-color: #6707dc;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+.borrar:hover {
+    background-color: rgb(134, 147, 248);
+}
+ */
