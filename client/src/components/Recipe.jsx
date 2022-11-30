@@ -43,11 +43,13 @@ const Recipe = (props) => {
             <div className={style.image_contain}>
                 <img className={style.image} src={props.image} alt={props.title} />
             </div>
-        
-            <h4>Health Score: {props.healthScore}</h4>
+            <div className={style.healthContain}>
+                <h4>Health Score: </h4>&nbsp;<span>{props.healthScore}</span>
+            </div>
+
             <h4>Tipe of diet:</h4>
             <div className={style.diets_contain}>
-                <h4>{props.diets?.join(' | ')}</h4>
+                {props.diets?.join(' | ')}
             </div>
 
             <div>{int()}</div>

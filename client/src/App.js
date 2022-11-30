@@ -16,7 +16,7 @@ function App() {
       <Route exact path="/home" render={() => <Home />} />
 {/*   <Route exact path="/home" render={() => <Navbar />} /> */}
       <Route exact path="/createrecipe" render={() => <CreateRecipe />} />
-      <Route exact path="/home/:id" component={Home}></Route>
+     {/*  <Route exact path="/home/:id" component={Home}></Route> */}
       <Route exact path="/recipedetail/:id" component={RecipeDetail}></Route>
 
 

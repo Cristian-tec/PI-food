@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const { Recipe, Diet, Recipe_Diet } = require('../db'); // ACA importo donde ejecuto los models de tablas
-const  { getRecipeTitle, getRecipeAll} = require  ('../controllers/controllers')
+const { getRecipeTitle, getRecipeAll, getRecipeId } = require('../controllers/controllers')
 const {
     API_Key
 } = process.env;
@@ -16,7 +16,7 @@ const router = Router();
 
 
 // En esta ruta si paso algo por query lo busco en la api y en la bbdd interna, sino encuentra nada arroja un error
-// Si no le paso nada por query traigo 20 elementos de la api mas todos de la bbdd interna
+// Si no le paso nada por query traigo 100 elementos de la api mas todos de la bbdd interna
 router.get('/', async (req, res) => {
     //          recipes?title=
     try {
@@ -44,71 +44,14 @@ router.get('/:idReceta', async (req, res) => {
 
     try {
         const { idReceta } = req.params;
-        console.log(idReceta);
-        // if(!idReceta) throw new Error('No has introducido un params válido.')
-        //console.log(idReceta.toString().length);
-        let size = idReceta.toString().length;
-        // tambien podria haber buscado letras dentro del string 
-        // y si tiene quiere decir que pertenece a la bbdd interna
-        if (size > 10) {
-
-            const queryLocal = await Recipe.findOne({
-                where: { id: idReceta },
-                attributes: ['id', 'title', 'image', 'summary', 'healthScore', 'stepToStep'],
-                include: [
-                    {// aca hago la puta relacion para que me traiga automaticamente de la tabla intermedia
-                        model: Diet,
-                        attributes: ["name"],
-                        through: {
-                            attributes: [],
-                        },
-                    }
-                ]
-            });
-            if (!queryLocal) throw new Error('No se encontro lo que busca en la BBDD interna.')
-
-            const reFormat = {
-
-                id: queryLocal.id,
-                title: queryLocal.title,
-                image: queryLocal.image,
-                summary: queryLocal.summary,
-                healthScore: queryLocal.healthScore,
-                stepToStep: queryLocal.stepToStep,
-                diets: queryLocal.diets?.map(e => e.name) // aca paso de [{diet: 'vegan'}, {diet:'gluten'}] -> ['vegan', 'gluten']
-
-            };
-
-            return res.status(200).json(reFormat);
-
-        } else {
-            const queryAxios = await axios
-                (`https://api.spoonacular.com/recipes/${idReceta}/information?apiKey=${API_Key}`)
-            //console.log(queryAxios);
-            if (!queryAxios) throw new Error('No se encontro lo que busca en la API')
-            const {
-                id,
-                title,
-                image,
-                dishTypes,
-                diets,
-                summary,
-                healthScore,
-                analyzedInstructions } = queryAxios.data;
-            // colocar condicion de que el arreglo sea mayor a cero sino el map daria error
-
-            let stepToStep = analyzedInstructions[0]?.steps.map(elem => {
-                return elem.number + ') ' + elem.step;
-            });
-
-            if (!stepToStep) stepToStep = []
-
-            //console.log(analyzedInstructions[0]);
-            return res.status(200).json({ id, title, image, dishTypes, diets, summary, healthScore, stepToStep })
-        }
-
+       // console.log(idReceta+'<<--');
+        const result = await getRecipeId(idReceta);
+        return res.status(200).json(result);
+        
     } catch (error) {
-        return res.status(404).send(error.message)
+
+        return res.status(404).send(error.message);
+        
     }
 })
 
@@ -120,7 +63,7 @@ router.post('/', async (req, res) => {
         const { title, summary, healthScore, stepToStep, image, diets } = req.body;
 
         if (!title || !summary) throw new Error('Faltan datos para crear la receta')
-
+        
         const existTitle = await Recipe.findAll({ where: { title: title } })
         //console.log(existTitle + '<<<<');
         if (existTitle.length) throw new Error('Ya existe una receta con ese titulo.')
@@ -158,7 +101,7 @@ router.delete('/:idDelete', async (req, res) => {
             console.log(idDelete + '<--');
             const recipeFind = await Recipe.findByPk(idDelete);
             if (recipeFind) {
-                await recipeFind.destroy(); 
+                await recipeFind.destroy();
                 // res.status(200).send('Usuario: ' + recipeFind.id + ' eliminado')
                 const result = await getRecipeAll();
                 res.status(200).json(result);

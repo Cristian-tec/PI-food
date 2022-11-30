@@ -11,7 +11,6 @@ import Paginado from './Paginado'
 
 const Home = (props) => {
 
-
     const [input, setInput] = useState(
         {
             title: '',
@@ -40,10 +39,10 @@ const Home = (props) => {
 
     // --------- FIN PAGINADO -------------------
 
-    /*     useEffect(() => {
-            dispatch(searchRecipes(''));
-        }, [dispatch])
-     */
+    useEffect(() => {
+        dispatch(searchRecipes(''));
+    }, [dispatch])
+
 
     const changeHandler = (e) => {
         // console.log(value);
@@ -77,6 +76,19 @@ const Home = (props) => {
         dispatch(orderAlph(e.target.value))
         setInput({ ...input, orderA: e.target.value })
     }
+
+    /*     const mostrar = () => {
+            if (allRecipes.length > 0) {
+                return (
+                    <Paginado
+                        recipesPerPage={recipesPerPage}
+                        allRecipes={allRecipes?.length}  // ESTE PUTO SIGNO ACA ME RESOLVIO TODO EL PROBLEMA !!!!
+                        paginado={paginado}
+                        currentPage={currentPage}
+                    />
+                )
+            }
+        } */
 
     return (
         <div className={style.containerhome}>
@@ -144,12 +156,13 @@ const Home = (props) => {
                 }
                 )}
             </div>
-            <Paginado
+
+{/*             <Paginado
                 recipesPerPage={recipesPerPage}
-                allRecipes={allRecipes?.length}  // ESTE PUTO SIGNO ACA ME RESOLVIO TODO EL PROBLEMA !!!!
+                allRecipes={allRecipes?.length}
                 paginado={paginado}
                 currentPage={currentPage}
-            />
+            />  */}
         </div>
     )
 }

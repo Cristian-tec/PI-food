@@ -37,8 +37,8 @@
 .recipes {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding-left: 200px;
+    grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
+    padding-left: 180px;
     padding-right: 150px;
 }
 

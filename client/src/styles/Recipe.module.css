@@ -20,7 +20,7 @@
 }
 
 .recipe:hover{
-    transform: scale(1.10);
+    transform: scale(1.05);
 }
 
 .image{
@@ -62,11 +62,23 @@
     text-shadow:0.2em 0.3em 0.6em rgb(30, 30, 30) ;
     background-color: white;
 }
+
 .diets_contain{
-    width: 250px;
+    width: 200px;
     height: 50px;
-    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 60px;
 }
+
+.healthContain{
+    display: flex;
+}
+.healthContain span{
+    font-size: 12px;
+    font-weight: bold;
+}
+
 
 .borrar{
     width: 60px;
